@@ -1,0 +1,69 @@
+import java.util.ArrayList;  
+import java.util.List;  
+
+class Prato {  
+    private String nome;  
+    private double preco;  
+
+    public Prato(String nome, double preco) {  
+        this.nome = nome;  
+        this.preco = preco;  
+    }  
+
+    @Override  
+    public String toString() {  
+        return nome + " - R$ " + String.format("%.2f", preco);  
+    }  
+}  
+
+class Cardapio {  
+    private String titulo;  
+    private List<Prato> pratos;  
+
+    public Cardapio(String titulo) {  
+        this.titulo = titulo;  
+        this.pratos = new ArrayList<>();  
+    }  
+
+    public void adicionarPrato(Prato prato) {  
+        pratos.add(prato);  
+    }  
+
+    public void exibir() {  
+        System.out.println(titulo);  
+        System.out.println("==================================");  
+        for (Prato prato : pratos) {  
+            System.out.println(prato);  
+        }  
+        System.out.println("==================================");  
+    }  
+}  
+
+public class Main {  
+    public static void main(String[] args) {  
+        Cardapio cardapio = new Cardapio("Cardápio do Restaurante");  
+
+        // Entradas  
+        cardapio.adicionarPrato(new Prato("Salada Caesar", 25.00));  
+        cardapio.adicionarPrato(new Prato("Bruschetta", 18.00));  
+        cardapio.adicionarPrato(new Prato("Batata Frita", 15.00));  
+        
+        // Pratos Principais  
+        cardapio.adicionarPrato(new Prato("Frango à Parmegiana", 35.00));  
+        cardapio.adicionarPrato(new Prato("Filet Mignon", 60.00));  
+        cardapio.adicionarPrato(new Prato("Lasanha Vegetariana", 45.00));  
+        
+        // Sobremesas  
+        cardapio.adicionarPrato(new Prato("Torta de Limão", 20.00));  
+        cardapio.adicionarPrato(new Prato("Pudim", 15.00));  
+        cardapio.adicionarPrato(new Prato("Gelato", 12.00));  
+        
+        // Bebidas  
+        cardapio.adicionarPrato(new Prato("Refrigerante", 8.00));  
+        cardapio.adicionarPrato(new Prato("Cerveja", 10.00));  
+        cardapio.adicionarPrato(new Prato("Suco Natural", 6.00));  
+
+        // Exibe o cardápio  
+        cardapio.exibir();  
+    }  
+}
