@@ -355,3 +355,107 @@ public class Main {
         cardapio.exibir();  
     }  
 }
+
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Usuario {
+    private String nome;
+    private String email;
+
+    public Usuario(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", Email: " + email;
+    }
+}
+
+public class SistemaCadastro {
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("1. Adicionar usuário");
+            System.out.println("2. Listar usuários");
+            System.out.println("3. Remover usuário");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // Consumir a nova linha
+
+            switch (opcao) {
+                case 1:
+                    adicionarUsuario(scanner);
+                    break;
+                case 2:
+                    listarUsuarios();
+                    break;
+                case 3:
+                    removerUsuario(scanner);
+                    break;
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 4);
+
+        scanner.close();
+    }
+
+    private static void adicionarUsuario(Scanner scanner) {
+        System.out.print("Digite o nome do usuário: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o email do usuário: ");
+        String email = scanner.nextLine();
+        usuarios.add(new Usuario(nome, email));
+        System.out.println("Usuário adicionado com sucesso!");
+    }
+
+    private static void listarUsuarios() {
+        if (usuarios.isEmpty()) {
+            System.out.println("Nenhum usuário cadastrado.");
+        } else {
+            System.out.println("Lista de usuários:");
+            for (Usuario usuario : usuarios) {
+                System.out.println(usuario);
+            }
+        }
+    }
+
+    private static void removerUsuario(Scanner scanner) {
+        System.out.print("Digite o email do usuário a ser removido: ");
+        String email = scanner.nextLine();
+        Usuario usuarioARemover = null;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equals(email)) {
+                usuarioARemover = usuario;
+                break;
+            }
+        }
+        if (usuarioARemover != null) {
+            usuarios.remove(usuarioARemover);
+            System.out.println("Usuário removido com sucesso!");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
+}
