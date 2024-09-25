@@ -32,10 +32,22 @@ class Cardapio {
     public void exibir() {  
         System.out.println(titulo);  
         System.out.println("==================================");  
-        for (Prato prato : pratos) {  
+        
+        // Exibe categorias
+        exibirCategoria("Entradas", pratos.subList(0, 3)); // Primeiros 3 pratos
+        exibirCategoria("Pratos Principais", pratos.subList(3, 6)); // Próximos 3 pratos
+        exibirCategoria("Sobremesas", pratos.subList(6, 9)); // Próximos 3 pratos
+        exibirCategoria("Bebidas", pratos.subList(9, 12)); // Últimos 3 pratos
+
+        System.out.println("==================================");  
+    }  
+
+    private void exibirCategoria(String categoria, List<Prato> pratosCategoria) {
+        System.out.println(categoria);
+        for (Prato prato : pratosCategoria) {  
             System.out.println(prato);  
         }  
-        System.out.println("==================================");  
+        System.out.println("----------------------------------");
     }  
 }  
 
