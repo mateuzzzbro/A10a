@@ -1,56 +1,51 @@
-// SistemaPessoa.java
-import javax.swing.*; // Exemplo usando Swing
-
-public class SistemaPessoa {
-    public static void main(String[] args) {
-        // Criar a janela principal
-        JFrame janela = new JFrame("Sistema de Pessoas");
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Criar o menu
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menuArquivo = new JMenu("Arquivo");
-        JMenuItem menuItemSair = new JMenuItem("Sair");
-        menuItemSair.addActionListener(e -> System.exit(0));
-        menuArquivo.add(menuItemSair);
-        menuBar.add(menuArquivo);
-        janela.setJMenuBar(menuBar);
-
-        // Criar o rodapé
-        JLabel rotuloRodape = new JLabel("Rodapé da aplicação");
-        janela.add(rotuloRodape, BorderLayout.SOUTH);
-
-        // Configurar o tamanho da janela e torná-la visível
-        janela.setSize(400, 300);
-        janela.setVisible(true);
-    }
-}
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SistemaPessoa {
+public class AcessoAplicativo {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Sistema de Pessoa");
+        JFrame frame = new JFrame("Acesso ao aplicativo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Criação do menu
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menuCadastro = new JMenu("Cadastro");
-        JMenuItem menuItemUsuarios = new JMenuItem("Usuários");
-        JMenuItem menuItemPessoas = new JMenuItem("Pessoas");
-        menuCadastro.add(menuItemUsuarios);
-        menuCadastro.add(menuItemPessoas);
-        menuBar.add(menuCadastro);
+        // Campos de texto para usuário e senha
+        JTextField txtUsuario = new JTextField(20);
+        JPasswordField txtSenha = new JPasswordField(20);
 
-        // ... (similar para o menu "Visualização")
+        // Botões
+        JButton btnConfirmar = new JButton("Confirmar");
+        JButton btnCancelar = new JButton("Cancelar");
 
-        // Criação do rodapé
-        JLabel rotuloRodape = new JLabel("Versão: 12.1.2024 Usuário: denys.silva Data de acesso: 20/09/2024 10:58");
-        frame.add(rotuloRodape, BorderLayout.SOUTH);
+        // Painel para organizar os componentes
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Usuário:"));
+        panel.add(txtUsuario);
+        panel.add(new JLabel("Senha:"));
+        panel.add(txtSenha);
+        panel.add(btnConfirmar);
+        panel.add(btnCancelar);
 
-        // ... (adicione outros componentes e layout)
+        // Ação do botão Confirmar
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String usuario = txtUsuario.getText();
+                String senha = new String(txtSenha.getPassword());
 
-        frame.setSize(400, 300);
+                if (usuario.equals("denys.silva") && senha.equals("Teste@2024")) {
+                    JOptionPane.showMessageDialog(null, "Acesso confirmado!");
+                    frame.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário ou senha inválido!");
+                }
+            }
+        });
+
+        // Ação do botão Cancelar
+        btnCancelar.addActionListener(e -> frame.dispose());
+
+        frame.add(panel);
+        frame.pack();
         frame.setVisible(true);
     }
+}
 }
