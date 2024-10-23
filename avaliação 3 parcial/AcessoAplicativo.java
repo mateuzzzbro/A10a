@@ -1,57 +1,38 @@
+import java.awt.*;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class SistemaPessoa {
-    // ... (código existente)
-
-    private void criarJanelaCadastro() {
-        JFrame frameCadastro = new JFrame("Cadastro de Usuários");
-        // ... (adicionar componentes e layout)
-
-        // Botão Sair
-        JButton btnSair = new JButton("Sair");
-        btnSair.addActionListener(e -> frameCadastro.dispose());
-
-        // ... (adicionar outros botões e suas ações)
-
-        frameCadastro.pack();
-        frameCadastro.setVisible(true);
-    }
-
-    // ... (outros métodos)
-}import javax.swing.*;
-import java.awt.*;
 
 public class SistemaPessoa {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Sistema de Pessoas");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Cria o menu (similar ao código anterior)
+        // Cria o menu
+        JMenuBar menuBar = criarMenu();
+        frame.setJMenuBar(menuBar);
 
-        // Cria o painel de cadastro
-        JPanel panelCadastro = new JPanel();
-        panelCadastro.setLayout(new GridLayout(5, 2)); // 5 linhas, 2 colunas
+        // Cria o rodapé
+        JLabel rotuloRodape = new JLabel("Versão: 12.1.2024 Usuário: denys.silva Data de acesso: 20/09/2024 10:58");
+        frame.add(rotuloRodape, BorderLayout.SOUTH);
 
-        // Adiciona os componentes ao painel de cadastro
-        panelCadastro.add(new JLabel("Usuário:"));
-        panelCadastro.add(new JTextField(20));
-        // ... (adicione os outros componentes)
+        // Adiciona um painel central para outros componentes (opcional)
+        JPanel panel = new JPanel();
+        frame.add(panel, BorderLayout.CENTER);
 
-        // Cria os botões de ação
-        JButton btnIncluir = new JButton("Incluir");
-        // ... (crie os outros botões)
-
-        // Adiciona os botões ao painel de cadastro
-        panelCadastro.add(btnIncluir);
-        // ... (adicione os outros botões)
-
-        // Cria o rodapé (similar ao código anterior)
-
-        frame.add(panelCadastro, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private static JMenuBar criarMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menuCadastro = new JMenu("Cadastro");
+        JMenuItem menuItemUsuarios = new JMenuItem("Usuários");
+        JMenuItem menuItemPessoas = new JMenuItem("Pessoas");
+        menuCadastro.add(menuItemUsuarios);
+        menuCadastro.add(menuItemPessoas);
+        menuBar.add(menuCadastro);
+
+        // ... (adicione outros menus e itens)
+
+        return menuBar;
     }
 }
