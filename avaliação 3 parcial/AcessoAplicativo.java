@@ -1,38 +1,50 @@
-import java.awt.*;
 import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SistemaPessoa {
+public class principal {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Sistema de Pessoas");
+        JFrame frame = new JFrame("Sistema de Pessoa");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Cria o menu
-        JMenuBar menuBar = criarMenu();
+        // Create menus and submenus
+        JMenuBar menuBar = new JMenuBar();
+        JMenu cadastroMenu = new JMenu("Cadastro");
+        JMenuItem usuariosItem = new JMenuItem("Usuários");
+        JMenuItem pessoasItem = new JMenuItem("Pessoas");
+        cadastroMenu.add(usuariosItem);
+        cadastroMenu.add(pessoasItem);
+        menuBar.add(cadastroMenu);
+
+        JMenu visualizacaoMenu = new JMenu("Visualização");
+        JMenuItem listaUsuariosItem = new JMenuItem("Lista de Usuários");
+        JMenuItem listaPessoasItem = new JMenuItem("Lista de Pessoas");
+        visualizacaoMenu.add(listaUsuariosItem);
+        visualizacaoMenu.add(listaPessoasItem);
+        menuBar.add(visualizacaoMenu);
+
+        JMenu sairMenu = new JMenu("Sair");
+        JMenuItem sairItem = new JMenuItem("Sair");
+        sairMenu.add(sairItem);
+        menuBar.add(sairMenu);
+
+        // Create footer
+        JLabel footer = new JLabel("Versão: 12.1.2024  Usuário: denys.silva  Data de acesso: 20/09/2024 10:58");
+
+        // Add components to the frame
         frame.setJMenuBar(menuBar);
+        frame.add(footer, BorderLayout.SOUTH);
 
-        // Cria o rodapé
-        JLabel rotuloRodape = new JLabel("Versão: 12.1.2024 Usuário: denys.silva Data de acesso: 20/09/2024 10:58");
-        frame.add(rotuloRodape, BorderLayout.SOUTH);
-
-        // Adiciona um painel central para outros componentes (opcional)
-        JPanel panel = new JPanel();
-        frame.add(panel, BorderLayout.CENTER);
+        // Define action for "Sair" item
+        sairItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);
-    }
-
-    private static JMenuBar criarMenu() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menuCadastro = new JMenu("Cadastro");
-        JMenuItem menuItemUsuarios = new JMenuItem("Usuários");
-        JMenuItem menuItemPessoas = new JMenuItem("Pessoas");
-        menuCadastro.add(menuItemUsuarios);
-        menuCadastro.add(menuItemPessoas);
-        menuBar.add(menuCadastro);
-
-        // ... (adicione outros menus e itens)
-
-        return menuBar;
     }
 }
